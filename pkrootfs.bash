@@ -47,15 +47,15 @@ rm "$fakeroot_state" && touch "$fakeroot_state"
 
 $fakeroot -- chown -vR root:root "$cfg_dir_rootfs"
 
-for d in bin sbin lib usr/bin usr/sbin usr/lib; do
-    $fakeroot -- chmod -vR 0755 "$cfg_dir_rootfs"/$d
-    $fakeroot -- chmod -vR 0755 "$cfg_dir_rootfs"/$d/*
-    $fakeroot -- chown -vR root:root "$cfg_dir_rootfs"/$d/*
-done
-
 for d in dev boot etc; do
     $fakeroot -- chmod -vR 0755 "$cfg_dir_rootfs"/$d
     $fakeroot -- chmod -vR 0644 "$cfg_dir_rootfs"/$d/*
+done
+
+for d in bin sbin lib usr/bin usr/sbin usr/lib usr/libexec etc/udhcp; do
+    $fakeroot -- chmod -vR 0755 "$cfg_dir_rootfs"/$d
+    $fakeroot -- chmod -vR 0755 "$cfg_dir_rootfs"/$d/*
+    $fakeroot -- chown -vR root:root "$cfg_dir_rootfs"/$d/*
 done
 
 # Copy DTB.

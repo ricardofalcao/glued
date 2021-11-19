@@ -1,16 +1,16 @@
 version=\
 (
-    '2.37.1'
+    '2.56.1'
 )
 
 url=\
 (
-    "http://ftp.acc.umu.se/pub/gnome/sources/glib/2.37/glib-$version.tar.xz"
+    "https://download.gnome.org/sources/glib/2.56/glib-${version}.tar.xz"
 )
 
 md5=\
 (
-    'bee51d61aa0d9b4071e997ff6c5fed5e'
+    '988af38524804ea1ae6bc9a2bad181ff'
 )
 
 maintainer=\
@@ -20,8 +20,10 @@ maintainer=\
 
 requires=\
 (
-    'pcre/default'
     'libffi/default'
+    'gettext/host'
+    'zlib/host'
+    'python_host/host'
 )
 
 configure()
@@ -37,11 +39,9 @@ configure()
         --target="$cfg_target_canonical" \
         --host="$cfg_target_canonical" \
         --build="$cfg_host_canonical" \
-        --enable-gtk-doc-html=no \
-        --enable-xattr=no \
-        --with-pcre=system \
-        --with-libiconv=no \
-        --disable-silent-rules
+        --enable-gtk-doc=no \
+        --enable-libmount=no \
+        --with-pcre=internal
 }
 
 build()
