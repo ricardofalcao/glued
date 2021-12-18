@@ -30,13 +30,13 @@ case $1 in
 
 		for i in $dns; do
 			echo "$0: Adding DNS $i"
-			R="${R}nameserver $i"
+			R="${R}nameserver $i\n"
 		done
 
 		if [ -x /sbin/resolvconf ]; then
-			echo -n "$R" | resolvconf -a "${interface}.udhcpc"
+			echo -n -e "$R" | resolvconf -a "${interface}.udhcpc"
 		else
-			echo -n "$R" > "$RESOLV_CONF"
+			echo -n -e "$R" > "$RESOLV_CONF"
 		fi
 		;;
 

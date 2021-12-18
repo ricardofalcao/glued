@@ -27,8 +27,7 @@ requires=\
 configure()
 {
     ./configure \
-        --prefix="${cfg_dir_toolchain_sysroot}/usr" \
-        --libexecdir="/usr/libexec"                 \
+        --prefix="/usr" \
         --target="$cfg_target_canonical"            \
         --host="$cfg_target_canonical"              \
         --build="$cfg_host_canonical"               \
@@ -42,7 +41,7 @@ build()
 
 host_install()
 {
-    $cmd_make install
+    $cmd_make DESTDIR="$cfg_dir_toolchain_sysroot" install
 }
 
 target_install() {
